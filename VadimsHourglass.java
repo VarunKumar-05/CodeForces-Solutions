@@ -1,6 +1,6 @@
 import java.io.IOException;
 import java.io.InputStream;
-
+//codeforces 1073 -div 2-A
 public class VadimsHourglass {
     public static void main(String[] args) throws Exception {
         FastScanner fs = new FastScanner(System.in);
