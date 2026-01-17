@@ -17,8 +17,7 @@ public class BlackslexAndPassword{                                  //B
                     long oldDist=Math.abs(a[i-1]-a[i])+Math.abs(a[i]-a[i+1]);
                     long newDist=Math.abs(a[i-1]-a[i+1]);
                     long reduction=oldDist-newDist;
-                    maxReduction=Math.max(maxReduction, reduction);
-                }
+                    maxReduction=Math.max(maxReduction, reduction);}
                 System.out.println(totalSum- maxReduction);
             }
         }
