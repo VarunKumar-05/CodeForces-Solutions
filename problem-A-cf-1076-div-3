@@ -1,0 +1,93 @@
+import java.io.IOException;
+import java.io.InputStream;
+
+public class Problemcf1076div3{
+    public static void main(String[] args) throws Exception {
+        FastScanner fs = new FastScanner(System.in);
+        int t = fs.nextInt();
+        StringBuilder out = new StringBuilder();
+        for (int caseIdx = 0; caseIdx < t; caseIdx++) {
+            int n = fs.nextInt();
+            int[] p = new int[n];
+            for (int i=0;i<n;i++) p[i] = fs.nextInt();
+            if (n > 1) {
+                int bestL=-1;
+                int bestR=-1;
+                int suffixMaxVal=p[n - 1];
+                int suffixMaxPos=n - 1;
+
+                for (int i=n-2;i>=0;i--) {
+                    if (p[i] < suffixMaxVal) {
+                        bestL=i;
+                        bestR=suffixMaxPos;
+                    }
+                    if (p[i] > suffixMaxVal) {
+                        suffixMaxVal=p[i];
+                        suffixMaxPos=i;
+                    }
+                }
+
+                if (bestL != -1) {
+                    for (int l=bestL, r=bestR; l<r; l++, r--) {
+                        int tmp=p[l];
+                        p[l]=p[r];
+                        p[r]=tmp;
+                    }
+                }
+            }
+
+            for (int i=0; i<n; i++) {
+                if (i > 0) out.append(' ');
+                out.append(p[i]);
+            }
+            if (caseIdx + 1 < t) out.append('\n');
+        }
+        System.out.print(out);
+    }
+//skeleton for Fast Input
+    private static final class FastScanner {
+        private final InputStream in;
+        private final byte[] buffer = new byte[1 << 16];
+        private int ptr = 0;
+        private int len = 0;
+
+        FastScanner(InputStream in) {
+            this.in = in;
+        }
+
+        int nextInt() throws IOException {
+            return (int) nextLong();
+        }
+
+        long nextLong() throws IOException {
+            int c;
+            while ((c = read()) <= ' ') {
+                if (c == -1) {
+                    return Long.MIN_VALUE;
+                }
+            }
+            boolean neg = false;
+            if (c == '-') {
+                neg = true;
+                c = read();
+            }
+            long val = 0;
+            while (c > ' ') {
+                val = val * 10 + (c - '0');
+                c = read();
+            }
+            return neg ? -val : val;
+        }
+
+        private int read() throws IOException {
+            if (ptr >= len) {
+                len = in.read(buffer);
+                ptr = 0;
+                if (len <= 0) {
+                    return -1;
+                }
+            }
+            return buffer[ptr++];
+        }
+    }
+}
