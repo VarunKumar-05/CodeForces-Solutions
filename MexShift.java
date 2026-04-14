@@ -16,7 +16,7 @@ public class MexShift{
                 if (!values.contains(v -1)){
                     int len=0;
                     long cur=v;
-                    while (values.contains((int) cur)){
+                    while (values.contains((int) cur)){// expands forward 
                         len++;
                         cur++;
                     }
